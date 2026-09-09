@@ -14,12 +14,6 @@ env:
   OWNER: "null0git"
 
 jobs:
-  release:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Test
-      run: echo "Release Work flow started"
   details:
     runs-on: ubuntu-latest
     outputs:
