@@ -9,7 +9,7 @@ description = "Fast, modular, policy-driven application security for Flask."
 readme = "README.md"
 requires-python = ">=3.9"
 license = { text = "MIT" }
-authors = [{ name = "Flask-Aegis Contributors" }]
+authors = [{ name = "Amir Essa Ahmed" }]
 keywords = ["flask", "security", "csrf", "xss", "rate-limit", "captcha", "waf"]
 classifiers = [
     "Development Status :: 3 - Alpha",
