@@ -1,6 +1,7 @@
 name: release-fixed
 
 on:
+  workflow_dispatch:
   push:
     tags:
       - "[0-9]+.[0-9]+.[0-9]+"
@@ -13,7 +14,12 @@ env:
   OWNER: "null0git"
 
 jobs:
-
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Test
+      run: echo "Release Work flow started"
   details:
     runs-on: ubuntu-latest
     outputs:
@@ -142,4 +148,4 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           gh release create ${{ needs.details.outputs.tag_name }} dist/* --title ${{ needs.details.outputs.tag_name }} --generate-notes
-          
+
