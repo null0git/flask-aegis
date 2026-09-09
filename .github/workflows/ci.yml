@@ -1,0 +1,101 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    name: Test (Python ${{ matrix.python-version }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.9", "3.10", "3.11", "3.12"]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+
+      - name: Set up Node.js (for sanitize parity test)
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install package with dev extras
+        run: pip install -e ".[dev,redis]"
+
+      - name: Run test suite
+        run: pytest -v
+
+      - name: Run fuzz harnesses (deeper pass than pytest's smoke wrapper)
+        run: |
+          python tests/fuzz/fuzz_rules.py 10000
+          python tests/fuzz/fuzz_traversal.py 5000
+          python tests/fuzz/fuzz_policy.py 1000
+
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    # continue-on-error: this job was authored without access to a local
+    # ruff/black install to verify the codebase actually passes cleanly
+    # yet -- remove this once you've confirmed `ruff check flask_aegis`
+    # and `black --check flask_aegis` are clean, so lint failures start
+    # blocking merges as intended.
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install lint tools
+        run: pip install -e ".[dev]"
+      - name: ruff
+        run: ruff check flask_aegis
+      - name: black --check
+        run: black --check flask_aegis
+
+  build:
+    name: Build package
+    runs-on: ubuntu-latest
+    needs: [test]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install build tooling
+        run: pip install build
+      - name: Build sdist and wheel
+        run: python -m build
+      - name: Verify playground/static assets are packaged
+        run: |
+          python -m zipfile -l dist/*.whl | grep "playground/templates/index.html"
+          python -m zipfile -l dist/*.whl | grep "static/aegis-sanitize.js"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
+
+  audit-self:
+    name: Self-audit (dogfooding)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install package
+        run: pip install -e .
+      - name: Run flask aegis audit against the example app
+        working-directory: examples
+        env:
+          FLASK_APP: basic_app.py
+        run: flask aegis audit --ci

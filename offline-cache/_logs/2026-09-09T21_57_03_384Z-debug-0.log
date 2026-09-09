@@ -1,0 +1,18 @@
+0 verbose cli C:\Program Files\nodejs\node.exe C:\Users\LENOVO\AppData\Roaming\npm\node_modules\npm\bin\npm-cli.js
+1 info using npm@11.6.2
+2 info using node@v22.20.0
+3 silly config load:file:C:\Users\LENOVO\AppData\Roaming\npm\node_modules\npm\npmrc
+4 silly config load:file:c:\Users\LENOVO\Downloads\Telegram Desktop\flask-aegis\flask-aegis\.npmrc
+5 silly config load:file:C:\Users\LENOVO\.npmrc
+6 silly config load:file:C:\Users\LENOVO\AppData\Roaming\npm\etc\npmrc
+7 verbose title npm config get prefix
+8 verbose argv "config" "get" "prefix"
+9 verbose logfile logs-max:10 dir:c:\Users\LENOVO\Downloads\Telegram Desktop\flask-aegis\flask-aegis\offline-cache\_logs\2026-09-09T21_57_03_384Z-
+10 verbose logfile c:\Users\LENOVO\Downloads\Telegram Desktop\flask-aegis\flask-aegis\offline-cache\_logs\2026-09-09T21_57_03_384Z-debug-0.log
+11 silly logfile done cleaning log files
+12 verbose cwd c:\Users\LENOVO\Downloads\Telegram Desktop\flask-aegis\flask-aegis
+13 verbose os Windows_NT 10.0.26200
+14 verbose node v22.20.0
+15 verbose npm  v11.6.2
+16 verbose exit 0
+17 info ok

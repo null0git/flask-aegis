@@ -1,0 +1,39 @@
+<svg width="640" height="160" viewBox="0 0 640 160" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Flask-Aegis">
+  <title>Flask-Aegis</title>
+  <defs>
+    <linearGradient id="bannerShieldFill" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#5b8cff"/>
+      <stop offset="100%" stop-color="#2a3f6e"/>
+    </linearGradient>
+    <linearGradient id="bannerShieldStroke" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#8ba9ff"/>
+      <stop offset="100%" stop-color="#5b8cff"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Shield icon, left-aligned -->
+  <g transform="translate(20, 20) scale(0.5)">
+    <path d="M120 34
+             L182 58
+             V118
+             C182 164 156 196 120 210
+             C84 196 58 164 58 118
+             V58
+             Z"
+          fill="url(#bannerShieldFill)"
+          stroke="url(#bannerShieldStroke)"
+          stroke-width="3"/>
+    <path d="M92 120 L114 142 L152 98"
+          fill="none"
+          stroke="#e6edf5"
+          stroke-width="12"
+          stroke-linecap="round"
+          stroke-linejoin="round"/>
+  </g>
+
+  <!-- Wordmark -->
+  <text x="140" y="78" font-family="-apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif"
+        font-size="42" font-weight="700" fill="#e6edf5">Flask<tspan fill="#5b8cff">-Aegis</tspan></text>
+  <text x="141" y="106" font-family="-apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif"
+        font-size="16" font-weight="400" fill="#8b98ab">Fast, modular, policy-driven application security for Flask</text>
+</svg>

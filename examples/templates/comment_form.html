@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Flask-Aegis: live sanitize preview example</title>
+  <script src="{{ url_for('aegis_static.static', filename='aegis-sanitize.js') }}"></script>
+</head>
+<body>
+  <h1>Comment</h1>
+
+  <!--
+    This preview is a UX convenience only. The actual, authoritative
+    sanitization happens server-side in the /comment view (see
+    basic_app.py), which calls flask_aegis.sanitize.sanitize_html via
+    the SANITIZE decision path and aegis.sanitized(). Nothing here is
+    trusted -- a request can always bypass this page entirely.
+  -->
+  <form method="post" action="/comment">
+    <textarea name="body" id="body" rows="4" cols="50"
+              oninput="updatePreview()"></textarea>
+    <button type="submit">Post</button>
+  </form>
+
+  <h2>Preview (client-side, non-authoritative)</h2>
+  <div id="preview"></div>
+
+  <script>
+    function updatePreview() {
+      const raw = document.getElementById("body").value;
+      const clean = AegisSanitize.sanitizeHtml(raw);
+      document.getElementById("preview").innerHTML = clean;
+    }
+  </script>
+</body>
+</html>

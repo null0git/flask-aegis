@@ -1,0 +1,49 @@
+<svg width="240" height="240" viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Flask-Aegis logo">
+  <title>Flask-Aegis</title>
+  <defs>
+    <linearGradient id="shieldFill" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#5b8cff"/>
+      <stop offset="100%" stop-color="#2a3f6e"/>
+    </linearGradient>
+    <linearGradient id="shieldStroke" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#8ba9ff"/>
+      <stop offset="100%" stop-color="#5b8cff"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="240" height="240" rx="28" fill="#0b0f14"/>
+
+  <!-- Shield body -->
+  <path d="M120 34
+           L182 58
+           V118
+           C182 164 156 196 120 210
+           C84 196 58 164 58 118
+           V58
+           Z"
+        fill="url(#shieldFill)"
+        stroke="url(#shieldStroke)"
+        stroke-width="3"/>
+
+  <!-- Inner shield line (depth) -->
+  <path d="M120 50
+           L168 69
+           V118
+           C168 156 148 182 120 194
+           C92 182 72 156 72 118
+           V69
+           Z"
+        fill="none"
+        stroke="#0b0f14"
+        stroke-width="2"
+        opacity="0.25"/>
+
+  <!-- Checkmark: request validated / allowed -->
+  <path d="M92 120 L114 142 L152 98"
+        fill="none"
+        stroke="#e6edf5"
+        stroke-width="10"
+        stroke-linecap="round"
+        stroke-linejoin="round"/>
+</svg>

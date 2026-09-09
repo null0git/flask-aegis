@@ -1,0 +1,29 @@
+# One-command local playground:
+#   docker compose up --build
+# Then open http://127.0.0.1:5050
+#
+# NOTE: like the Dockerfile, this compose file was authored without a
+# local Docker daemon to run `docker compose up` against directly --
+# the individual pieces (the image build, the exact `python -m
+# flask_aegis.playground` command, the port) were verified separately;
+# the full compose flow has not been executed end-to-end. Please run it
+# yourself and file an issue if anything doesn't work as described.
+#
+# This intentionally does NOT include a Redis service by default --
+# the playground uses the in-memory rate-limit backend, which is fine
+# for a single container. If you're testing RedisBackend specifically,
+# add a redis service here and point your own app's
+# Aegis(rate_limit_backend=RedisBackend(url="redis://redis:6379/0"))
+# at it -- see the README's "Rate limiting" section.
+
+services:
+  playground:
+    build: .
+    ports:
+      - "5050:5050"
+    # The playground has no external state (SQLite is in-memory, the
+    # traversal sandbox is a temp dir created at process start) -- a
+    # container restart resets it to a clean slate, which is the
+    # correct behavior for a testing tool, not a bug to work around
+    # with a volume.
+    restart: unless-stopped

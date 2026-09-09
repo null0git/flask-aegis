@@ -1,0 +1,44 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "flask-aegis"
+version = "0.7.0"
+description = "Fast, modular, policy-driven application security for Flask."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [{ name = "Flask-Aegis Contributors" }]
+keywords = ["flask", "security", "csrf", "xss", "rate-limit", "captcha", "waf"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Web Environment",
+    "Framework :: Flask",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
+    "Topic :: Security",
+    "Typing :: Typed",
+]
+dependencies = [
+    "flask>=2.3",
+    "click>=8.0",
+    "pyyaml>=6.0",
+]
+
+[project.optional-dependencies]
+redis = ["redis>=4.5"]
+dev = ["pytest>=7.0", "hypothesis>=6.90", "black", "ruff"]
+
+[project.urls]
+Homepage = "https://github.com/example/flask-aegis"
+Documentation = "https://github.com/example/flask-aegis/tree/main/docs"
+Issues = "https://github.com/example/flask-aegis/issues"
+
+[tool.setuptools.packages.find]
+include = ["flask_aegis*"]
+
+[tool.setuptools.package-data]
+flask_aegis = ["static/*.js", "playground/templates/*.html", "playground/static/*", "py.typed"]

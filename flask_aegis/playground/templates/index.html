@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Flask-Aegis Playground</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header class="top">
+    <h1>Flask-Aegis Playground <span class="badge-version">v{{ version }}</span></h1>
+    <p>
+      Test every attack class Flask-Aegis detects, live, against a real
+      (contained) vulnerable sink. Each card sends the identical payload to
+      an unprotected route and an <code>@aegis.protect(...)</code>-wrapped
+      route, so you can see the difference directly. Toggle "Protected" and
+      hit Run.
+    </p>
+    <div class="warning-banner">
+      Local testing only — do not expose this app publicly. What's real vs.
+      simulated per attack class (SQLi runs against in-memory SQLite,
+      traversal is sandboxed, command injection and XXE resolution are
+      simulated rather than executed) is documented in
+      <code>flask_aegis/playground/attacks.py</code>.
+    </div>
+  </header>
+
+  <main>
+    <div class="toolbar">
+      <input type="search" id="search" placeholder="Filter by name, category, or rule id…">
+      <span class="stat" id="visible-count">{{ attacks|length }} of {{ attacks|length }} shown</span>
+    </div>
+
+    <div class="grid" id="grid">
+      {% for attack in attacks %}
+      <div class="card"
+           data-attack="{{ attack.id }}"
+           data-field="{{ attack.field_name }}"
+           data-search="{{ (attack.name ~ ' ' ~ attack.category ~ ' ' ~ attack.rule_id)|lower }}">
+        <div class="card-head">
+          <div>
+            <h2>{{ attack.name }}</h2>
+            <span class="rule-id">{{ attack.rule_id }} &middot; {{ attack.category }}</span>
+          </div>
+          <span class="severity {{ attack.severity }}">{{ attack.severity }}</span>
+        </div>
+        <p class="desc">{{ attack.description }}</p>
+        <p class="mitigation"><strong>Fix:</strong> {{ attack.mitigation }}</p>
+        <textarea class="payload" spellcheck="false" data-default="{{ attack.example_payload }}">{{ attack.example_payload }}</textarea>
+        <div class="controls">
+          <label class="toggle">
+            <input type="checkbox" checked>
+            <span class="switch"></span>
+            Protected
+          </label>
+          <div class="actions">
+            <button class="reset" type="button">Reset payload</button>
+            <button class="run" type="button">Run test</button>
+          </div>
+        </div>
+        <div class="result"></div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <p class="footer-note">
+      Flask-Aegis &middot; every card above corresponds to a rule in
+      <code>flask aegis rules</code>. Run <code>flask aegis routes</code> in
+      your own app to see which of these policies are active on which
+      routes, and <code>flask aegis audit</code> to check your
+      configuration for common mistakes.
+    </p>
+  </main>
+
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
