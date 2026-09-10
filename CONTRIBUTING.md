@@ -18,7 +18,7 @@ to be true. Contributions that raise that bar are the most welcome kind.
 ## Development setup
 
 ```bash
-git clone https://github.com/example/flask-aegis
+git clone https://github.com/null0git/flask-aegis
 cd flask-aegis
 pip install -e ".[dev,redis]"
 pytest

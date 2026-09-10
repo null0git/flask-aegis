@@ -18,7 +18,7 @@ applications that use it).
 
 Instead:
 
-1. Email `security@example.com` with a description of the issue, affected
+1. Email `amirpubgplayer1@gmail.com` with a description of the issue, affected
    version(s), and — if possible — a minimal reproduction.
 2. You should receive an acknowledgment within 3 business days.
 3. We will work with you on a coordinated disclosure timeline. We ask for

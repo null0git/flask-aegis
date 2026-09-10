@@ -25,6 +25,7 @@ htmlcov/
 .vscode/
 .idea/
 *.swp
+offline-cache/
 
 # OS
 .DS_Store

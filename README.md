@@ -14,17 +14,7 @@
 
 <p align="center"><em>Fast, modular, policy-driven application security for Flask.</em></p>
 
-> **Logo note:** `assets/logo/banner.svg` and `assets/logo/logo.svg` are
-> included as a starting point/placeholder — swap them for your own art
-> by replacing those two files (same filenames) before publishing under
-> your own branding; nothing else in the docs needs to change.
 
-> **Before you publish:** the badges above and every GitHub link in this
-> README point at the placeholder `example/flask-aegis`. Find-and-replace
-> that with your actual `<github-username>/<repo-name>` throughout the
-> repo (README, `pyproject.toml`'s `[project.urls]`, `CONTRIBUTING.md`)
-> before pushing, or the CI/PyPI badges will render as broken/unknown
-> and the links won't resolve.
 
 ```python
 from flask import Flask
@@ -1653,7 +1643,7 @@ environment.
 ## Testing
 
 ```bash
-git clone https://github.com/example/flask-aegis
+git clone https://github.com/null0git/flask-aegis
 cd flask-aegis
 pip install -e ".[dev]"
 pytest

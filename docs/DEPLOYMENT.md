@@ -24,7 +24,7 @@ way under any WSGI server, with one thing to get right deliberately:
 
 `MemoryBackend` (the default `RateLimiter` backend) keeps its counters
 in the process that created it. With gunicorn's default *sync* worker
-model, each of your `-w N` workers is a **separate process** with its
+model, each of your ` -w N` workers is a **separate process** with its
 own `MemoryBackend` — a policy configured as `"10/minute"` becomes,
 in effect, `"10*N/minute"` across the whole deployment, since a given
 client's requests land on different workers round-robin and each
