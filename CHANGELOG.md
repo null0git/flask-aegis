@@ -5,7 +5,7 @@ follows [Semantic Versioning](https://semver.org/) once it reaches 1.0;
 until then, minor version bumps may include behavior changes as the
 alpha design settles.
 
-## [0.7.0] — Phase 7: type checking, deployment tooling, plugin fix
+## [0.7.2] — Phase 7: type checking, deployment tooling, plugin fix
 
 - `flask_aegis/py.typed` (PEP 561 marker) — verified packaged in a real
   built wheel, alongside the `Typing :: Typed` classifier.

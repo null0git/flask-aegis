@@ -91,7 +91,7 @@ Five things are treated as first-class requirements, not bullet points:
 
 ## Status
 
-Flask-Aegis is **alpha software (v0.7.0)**. This repository currently ships
+Flask-Aegis is **alpha software (v0.7.2)**. This repository currently ships
 **Phase 1 + Phase 2 + Phase 3 + Phase 4 + Phase 5 + Phase 6 + Phase 7**:
 
 | Area | Status |

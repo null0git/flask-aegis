@@ -45,7 +45,7 @@ _RULE_SANITIZERS = {
     "AEGIS-CSV-001": sanitize_csv_field,
 }
 
-__version__ = "0.7.0"
+__version__ = "0.7.2"
 
 __all__ = [
     "Aegis", "Policy", "Decision", "Finding", "Verdict",
