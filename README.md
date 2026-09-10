@@ -207,17 +207,17 @@ HTTP Request
      │
      ▼
 ┌──────────────────────────┐
-│ Flask-Aegis               │
-│                            │
-│ 1. Request normalization   │  ← flask_aegis.context.RequestContext
-│ 2. Policy resolution        │  ← compiled at startup, O(1) lookup
-│ 3. Rate limiting             │  ← flask_aegis.ratelimit
-│ 4. Security rules             │  ← flask_aegis.rules (XSS/SQLi/traversal/...)
-│ 5. Risk evaluation              │  ← flask_aegis.risk
-│ 6. CAPTCHA / challenge            │  ← flask_aegis.captcha
-│ 7. Decision engine                  │  ← flask_aegis.decisions
-│ 8. Event generation                   │  ← flask_aegis.events
-└────────────┬───────────────────────────┘
+│ Flask-Aegis              │
+│                          │
+│ 1. Request normalization │  ← flask_aegis.context.RequestContext
+│ 2. Policy resolution     │  ← compiled at startup, O(1) lookup
+│ 3. Rate limiting         │  ← flask_aegis.ratelimit
+│ 4. Security rules        │  ← flask_aegis.rules (XSS/SQLi/traversal/...)
+│ 5. Risk evaluation       │  ← flask_aegis.risk
+│ 6. CAPTCHA / challenge   │  ← flask_aegis.captcha
+│ 7. Decision engine       │  ← flask_aegis.decisions
+│ 8. Event generation      │  ← flask_aegis.events
+└────────────┬─────────────┘
              │
        ┌─────┴─────┐
        ▼           ▼
@@ -239,49 +239,49 @@ HTTP Request
 flask_aegis/
 ├── __init__.py       Aegis extension class — wires everything together
 ├── policy.py         Policy engine: definitions, inheritance, compilation
-├── profiles.py        Built-in security profiles
-├── rulesets.py          Versioned rule sets (2025-baseline / 2026 / 2027 / 2028 / 2029 / latest)
-├── decisions.py           Decision engine (ALLOW..BLOCK) + enforcement modes
-├── risk.py                  Additive, explainable risk scoring
-├── context.py                 Request normalization
-├── ratelimit.py                  Sliding-window rate limiting, pluggable backends
-├── headers.py                      Response security headers & cookie hardening
-├── sanitize.py                       Input sanitization functions (backend)
-├── upload.py                           File-upload validation, Zip Slip + zip-bomb protection
-├── ssrf.py                               SSRF URL validator (called from app code)
-├── business.py                             Quotas & replay/idempotency protection
-├── openapi.py                                OpenAPI-derived request validation
-├── graphql.py                                  GraphQL depth/complexity/introspection protection
-├── websocket.py                                  WebSocket abuse protection (library-agnostic)
-├── config_export.py                                Secret-free config snapshot (flask aegis config export)
-├── benchmark.py                                      Benchmark suite (flask aegis benchmark)
-├── events.py                                           Structured events, pub/sub, auto-redaction
-├── exceptions.py                                         Exception hierarchy
-├── cli.py                                                  `flask aegis ...` diagnostics
+├── profiles.py       Built-in security profiles
+├── rulesets.py       Versioned rule sets (2025-baseline / 2026 / 2027 / 2028 / 2029 / latest)
+├── decisions.py      Decision engine (ALLOW..BLOCK) + enforcement modes
+├── risk.py           Additive, explainable risk scoring
+├── context.py        Request normalization
+├── ratelimit.py      Sliding-window rate limiting, pluggable backends
+├── headers.py        Response security headers & cookie hardening
+├── sanitize.py       Input sanitization functions (backend)
+├── upload.py         File-upload validation, Zip Slip + zip-bomb protection
+├── ssrf.py           SSRF URL validator (called from app code)
+├── business.py       Quotas & replay/idempotency protection
+├── openapi.py        OpenAPI-derived request validation
+├── graphql.py        GraphQL depth/complexity/introspection protection
+├── websocket.py      WebSocket abuse protection (library-agnostic)
+├── config_export.py  Secret-free config snapshot (flask aegis config export)
+├── benchmark.py      Benchmark suite (flask aegis benchmark)
+├── events.py         Structured events, pub/sub, auto-redaction
+├── exceptions.py     Exception hierarchy
+├── cli.py            `flask aegis ...` diagnostics
 ├── static/
-│   └── aegis-sanitize.js                                       Frontend mirror of sanitize.py
+│   └── aegis-sanitize.js    Frontend mirror of sanitize.py
 ├── playground/
-│   ├── __init__.py                                               create_app() -- the interactive playground
-│   ├── __main__.py                                                 python -m flask_aegis.playground entry point
-│   ├── attacks.py                                                    Attack definitions + contained vulnerable sinks
-│   ├── templates/index.html                                            Playground UI
-│   └── static/{style.css,app.js}                                          Playground styling + fetch()-based test runner
-├── rules/                                                                   (25 rules total)
-│   ├── base.py                                                               Rule base class + registry
-│   ├── xss.py / sqli.py / traversal.py                                         AEGIS-XSS-001, -SQLI-001, -TRAVERSAL-001
-│   ├── ssti.py / cmdi.py                                                        AEGIS-SSTI-001, -CMD-001
-│   ├── ldap_xpath.py                                                             AEGIS-LDAP-001, -XPATH-001
-│   ├── misc_injection.py                                                          AEGIS-HEADER-001, -CSV-001
-│   ├── nosqli.py / xxe.py / xml_bomb.py                                            AEGIS-NOSQLI-001, -XXE-001, -XMLBOMB-001
-│   ├── open_redirect.py / hpp.py                                                    AEGIS-REDIRECT-001, -HPP-001
-│   ├── deserialization.py / ssrf_field.py                                            AEGIS-DESERIAL-001, -SSRF-001
-│   ├── proto_pollution.py / el_injection.py                                           AEGIS-PROTO-001, -EL-001
-│   ├── mass_assignment.py / redos.py                                                    AEGIS-MASSASSIGN-001, -REDOS-001
-│   ├── jwt_weak.py / homograph.py                                                        AEGIS-JWT-001, -HOMOGRAPH-001
-│   └── engine_injection.py                                                                AEGIS-SSI-001, -LATEX-001, -FORMATSTR-001
+│   ├── __init__.py   create_app() -- the interactive playground
+│   ├── __main__.py   python -m flask_aegis.playground entry point
+│   ├── attacks.py    Attack definitions + contained vulnerable sinks
+│   ├── templates/index.html    Playground UI
+│   └── static/{style.css,app.js}  Playground styling + fetch()-based test runner
+├── rules/                                      (25 rules total)
+│   ├── base.py                                 Rule base class + registry
+│   ├── xss.py / sqli.py / traversal.py         AEGIS-XSS-001, -SQLI-001, -TRAVERSAL-001
+│   ├── ssti.py / cmdi.py                       AEGIS-SSTI-001, -CMD-001
+│   ├── ldap_xpath.py                           AEGIS-LDAP-001, -XPATH-001
+│   ├── misc_injection.py                       AEGIS-HEADER-001, -CSV-001
+│   ├── nosqli.py / xxe.py / xml_bomb.py        AEGIS-NOSQLI-001, -XXE-001, -XMLBOMB-001
+│   ├── open_redirect.py / hpp.py               AEGIS-REDIRECT-001, -HPP-001
+│   ├── deserialization.py / ssrf_field.py      AEGIS-DESERIAL-001, -SSRF-001
+│   ├── proto_pollution.py / el_injection.py    AEGIS-PROTO-001, -EL-001
+│   ├── mass_assignment.py / redos.py      AEGIS-MASSASSIGN-001, -REDOS-001
+│   ├── jwt_weak.py / homograph.py    AEGIS-JWT-001, -HOMOGRAPH-001
+│   └── engine_injection.py     AEGIS-SSI-001, -LATEX-001, -FORMATSTR-001
 └── captcha/
-    ├── base.py                                                                               CaptchaProvider interface
-    └── recaptcha.py                                                                             reCAPTCHA v2/v3 + NullProvider
+    ├── base.py          CaptchaProvider interface
+    └── recaptcha.py     reCAPTCHA v2/v3 + NullProvider
 ```
 
 Every component is independently importable and independently testable —
